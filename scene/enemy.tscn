@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cthhq7ovv4kw3"]
+
+[ext_resource type="Texture2D" uid="uid://y6m6s6i6amxr" path="res://entities/polar/4.png" id="1_8u16h"]
+[ext_resource type="Script" uid="uid://cwnh78l8ki74g" path="res://scene/enemy.gd" id="1_b7koy"]
+[ext_resource type="Texture2D" uid="uid://dab42hquj2xxn" path="res://entities/polar/5.png" id="2_b7koy"]
+[ext_resource type="Texture2D" uid="uid://cxrhrocufch2m" path="res://entities/polar/6.png" id="3_yvcfn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vufel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8u16h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_b7koy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yvcfn")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulb22"]
+size = Vector2(57, 31)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1446284547]
+script = ExtResource("1_b7koy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=192779851]
+sprite_frames = SubResource("SpriteFrames_vufel")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1992379988]
+position = Vector2(1.5, 14.5)
+shape = SubResource("RectangleShape2D_ulb22")
+
+[node name="FloorLeft" type="RayCast2D" parent="." unique_id=752205498]
+target_position = Vector2(-27, 29)
+
+[node name="FloorRight" type="RayCast2D" parent="." unique_id=1376774050]
+target_position = Vector2(29, 30)
