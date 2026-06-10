@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://coy58shs7swok" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/1 - Waters_version_1.png" id="7_7xb8y"]
 [ext_resource type="Texture2D" uid="uid://4sjjrq0dx78p" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/2 - Waters_version_2.png" id="8_34ia6"]
 [ext_resource type="PackedScene" uid="uid://cthhq7ovv4kw3" path="res://scene/enemy.tscn" id="9_34ia6"]
+[ext_resource type="PackedScene" uid="uid://18rh8yor3sdy" path="res://scene/killzone.tscn" id="10_d18o5"]
+[ext_resource type="PackedScene" uid="uid://cwm2h41u8qtno" path="res://scene/coin.tscn" id="11_t8vtq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d18o5"]
 animations = [{
@@ -23,6 +25,9 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t8vtq"]
+distance = -192.0
 
 [node name="Tropic" type="Node2D" unique_id=744428384]
 
@@ -93,3 +98,11 @@ centered = false
 
 [node name="Enemy" parent="." unique_id=1446284547 instance=ExtResource("9_34ia6")]
 position = Vector2(573, 18)
+
+[node name="killzone" parent="." unique_id=273525040 instance=ExtResource("10_d18o5")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=1825726025]
+shape = SubResource("WorldBoundaryShape2D_t8vtq")
+
+[node name="Fragmento" parent="." unique_id=251743435 instance=ExtResource("11_t8vtq")]
+position = Vector2(628, 139)

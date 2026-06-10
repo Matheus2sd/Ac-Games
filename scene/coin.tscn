@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cwm2h41u8qtno"]
+
+[ext_resource type="Script" uid="uid://digfb0in4ydi4" path="res://scripts/coin.gd" id="1_ya73g"]
+[ext_resource type="Texture2D" uid="uid://clh716jk15ro1" path="res://utilites/Fragmento.png" id="2_leebs"]
+[ext_resource type="Texture2D" uid="uid://c5apxut6jjd87" path="res://utilites/addons/kenney_particle_pack/star_04.png" id="3_leebs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ldxs"]
+radius = 100.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ya73g"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+direction = Vector3(0, -1, 0)
+spread = 40.765
+initial_velocity_min = 80.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.0
+scale_max = 0.049999997
+color = Color(0.95539445, 0.9722397, 0.9340688, 1)
+
+[node name="Fragmento" type="Area2D" unique_id=251743435]
+script = ExtResource("1_ya73g")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1592277379]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("2_leebs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1622765268]
+position = Vector2(0.2, 0)
+scale = Vector2(0.03, 0.03)
+shape = SubResource("CircleShape2D_4ldxs")
+
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=2134960666]
+emitting = false
+texture = ExtResource("3_leebs")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_ya73g")

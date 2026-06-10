@@ -35,3 +35,15 @@ func _physics_process(delta: float) -> void:
 		anim.play("jump")
 
 	move_and_slide()
+
+# Arquivo: player.gd
+
+#... restante do código
+
+func die():
+	# get_tree() — acessa o SceneTree, que é o gerenciador geral do jogo. 
+	# É por ele que você controla cenas, pausa o jogo, fecha o jogo, etc.
+	
+	# .reload_current_scene() — reinicia a cena atual do zero, como se 
+	# você tivesse fechado e reaberto ela.
+	get_tree().reload_current_scene()
