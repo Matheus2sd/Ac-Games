@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cthhq7ovv4kw3" path="res://scene/enemy.tscn" id="9_34ia6"]
 [ext_resource type="PackedScene" uid="uid://18rh8yor3sdy" path="res://scene/killzone.tscn" id="10_d18o5"]
 [ext_resource type="PackedScene" uid="uid://cwm2h41u8qtno" path="res://scene/coin.tscn" id="11_t8vtq"]
+[ext_resource type="PackedScene" path="res://scene/game_ui.tscn" id="12_gameui"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d18o5"]
 animations = [{
@@ -106,3 +107,5 @@ shape = SubResource("WorldBoundaryShape2D_t8vtq")
 
 [node name="Fragmento" parent="." unique_id=251743435 instance=ExtResource("11_t8vtq")]
 position = Vector2(628, 139)
+
+[node name="GameUI" parent="." instance=ExtResource("12_gameui")]
