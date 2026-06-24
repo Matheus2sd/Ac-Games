@@ -85,6 +85,7 @@ func quit_game() -> void:
 
 
 func reset_run() -> void:
+	_reset_player_powerups()
 	score = 0
 	lives = max_lives
 	_game_over_emitted = false
@@ -108,6 +109,7 @@ func damage_player(amount: int = 1) -> void:
 	lives_changed.emit(lives)
 
 	if lives == 0:
+		_reset_player_powerups()
 		_enter_game_over()
 	else:
 		_respawn_player()
@@ -127,6 +129,8 @@ func _respawn_player() -> void:
 	if not _has_spawn_position or not is_instance_valid(_player):
 		return
 
+	_reset_player_powerups()
+
 	if _player.has_method("respawn_at"):
 		_player.respawn_at(_spawn_position)
 	else:
@@ -140,3 +144,8 @@ func _set_state(new_state: int) -> void:
 
 	game_state = new_state
 	state_changed.emit(game_state)
+
+
+func _reset_player_powerups() -> void:
+	if is_instance_valid(_player) and _player.has_method("reset_powerups"):
+		_player.reset_powerups()

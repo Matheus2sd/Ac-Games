@@ -4,6 +4,18 @@ const GameManagerScript = preload("res://scripts/GameManager.gd")
 
 var failures: Array[String] = []
 
+class TestPlayer:
+	extends CharacterBody2D
+
+	var reset_powerups_count := 0
+
+	func reset_powerups() -> void:
+		reset_powerups_count += 1
+
+	func respawn_at(spawn_position: Vector2) -> void:
+		global_position = spawn_position
+		velocity = Vector2.ZERO
+
 
 func _initialize() -> void:
 	call_deferred("_run_tests")
@@ -54,7 +66,7 @@ func _test_add_score_only_while_playing(manager: Node) -> void:
 
 
 func _test_damage_respawns_or_enters_game_over(manager: Node) -> void:
-	var player := CharacterBody2D.new()
+	var player := TestPlayer.new()
 	root.add_child(player)
 	player.global_position = Vector2(10, 20)
 	manager.register_player(player)
@@ -68,6 +80,7 @@ func _test_damage_respawns_or_enters_game_over(manager: Node) -> void:
 	_assert_equal(player.global_position, Vector2(10, 20), "damage_player respawns player")
 	_assert_equal(player.velocity, Vector2.ZERO, "damage_player clears player velocity")
 	_assert_equal(manager.game_state, manager.GameState.PLAYING, "damage_player keeps game playing with lives left")
+	_assert_true(player.reset_powerups_count > 0, "damage_player resets power-ups")
 
 	var game_over_scores: Array[int] = []
 	manager.game_over.connect(func(final_score: int) -> void: game_over_scores.append(final_score))
@@ -85,3 +98,8 @@ func _test_damage_respawns_or_enters_game_over(manager: Node) -> void:
 func _assert_equal(actual: Variant, expected: Variant, label: String) -> void:
 	if actual != expected:
 		failures.append("%s: expected %s, got %s" % [label, str(expected), str(actual)])
+
+
+func _assert_true(value: bool, label: String) -> void:
+	if not value:
+		failures.append("%s: expected true" % label)

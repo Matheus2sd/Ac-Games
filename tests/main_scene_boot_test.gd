@@ -21,6 +21,8 @@ func _run_tests() -> void:
 
 	_assert_not_null(level.get_node_or_null("Player"), "main scene has Player")
 	_assert_not_null(level.get_node_or_null("Fragmento"), "main scene has coin")
+	_assert_not_null(level.get_node_or_null("SpeedPowerup"), "main scene has speed power-up")
+	_assert_not_null(level.get_node_or_null("JumpPowerup"), "main scene has jump power-up")
 	_assert_not_null(level.get_node_or_null("killzone"), "main scene has killzone")
 	_assert_not_null(level.get_node_or_null("GameUI"), "main scene has GameUI")
 	_assert_equal(paused, true, "main scene boots paused on menu")
